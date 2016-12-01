@@ -15,7 +15,7 @@ var env,
 	outputDir,
 	sassStyle;
 
-env = process.env.NODE_ENV || 'production';
+env = process.env.NODE_ENV || 'development';
 
 if (env==='development') {
 	outputDir = 'builds/development/';
@@ -55,9 +55,11 @@ gulp.task('js', function() {
 gulp.task('compass', function() {
 	gulp.src(sassSources)
 		.pipe(compass({			// set up preferences here instead of a config file
+		//	config_file: 'config.rb',
 			sass: 'components/sass',
 			image: outputDir + 'images',
-			style: sassStyle
+			style: sassStyle,
+			debug: true
 		})
 		.on('error', gutil.log))
 		.pipe(gulp.dest(outputDir + 'css'))
